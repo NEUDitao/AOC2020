@@ -1,10 +1,10 @@
 # dune exec ./helloworld.exe
 # OCAMLPARAM: unset
 # Workspace root: /home/sploo-machine/AOC/day1
-$ /usr/bin/nproc > /tmp/dune5845a2.output 2> /dev/null
+$ /usr/bin/nproc > /tmp/dunec73184.output 2> /dev/null
 # Auto-detected concurrency: 16
 # disable binary cache
-$ /usr/bin/ocamlc.opt -config > /tmp/dunec4e319.output
+$ /usr/bin/ocamlc.opt -config > /tmp/dunec4b462.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
