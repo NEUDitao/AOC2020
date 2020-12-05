@@ -1,1 +1,1 @@
-day2.ml: List Str String
+day2.ml: List Scanf String
