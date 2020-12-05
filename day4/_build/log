@@ -1,10 +1,10 @@
 # dune exec ./day4.exe
 # OCAMLPARAM: unset
 # Workspace root: /home/sploo-machine/AOC/day4
-$ /usr/bin/nproc > /tmp/dune03570d.output 2> /dev/null
+$ /usr/bin/nproc > /tmp/dune1380e7.output 2> /dev/null
 # Auto-detected concurrency: 16
 # disable binary cache
-$ /usr/bin/ocamlc.opt -config > /tmp/dune9087cd.output
+$ /usr/bin/ocamlc.opt -config > /tmp/duneebe7ae.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"

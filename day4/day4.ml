@@ -20,7 +20,7 @@ let parse_list l =
     match l with
     | [] -> ht
     | first::rest -> 
-      let line = Scanf.sscanf first "%s:%s" (fun key value -> (key, value)) in
+      let line = Scanf.sscanf first "%s@:%s" (fun key value -> (key, value)) in
       Hashtbl.add ht (fst line) (snd line);
       str_list_to_hash_table rest ht in
   List.map (fun x -> str_list_to_hash_table x (Hashtbl.create 8)) strs
@@ -41,4 +41,4 @@ let rec verify_passports l valid_passport =
 let () =
   let ic = open_in "input.txt" in
   let l = parse_list (build_list (ic)) in
-  print_endline ("part 1: "^string_of_int(verify_passports l contains_passport_fields)) (* 216 *)
+  print_endline ("part 1: "^string_of_int(verify_passports l contains_passport_fields)); (* 216 *)
