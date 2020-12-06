@@ -61,4 +61,4 @@ let () =
   let ic = open_in "input.txt" in
   let l = parse_list (build_list (ic)) in
   print_endline ("part 1: "^string_of_int(verify_passports l contains_passport_fields)); (* 216 *)
-  print_endline ("part 2: "^string_of_int(verify_passports l verify_fields)); (* 216 *)
+  print_endline ("part 2: "^string_of_int(verify_passports l verify_fields)); (* 150 *)
