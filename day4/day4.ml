@@ -28,17 +28,37 @@ let parse_list l =
 let fields = [ "ecl" ; "pid" ; "eyr" ; "hcl" ; "byr" ; "iyr" ; "hgt"]
 
 let contains_passport_fields passport = 
-  let keys = Hashtbl.fold (fun k v acc -> ignore(v); k::acc) passport [] in
+  let keys = Hashtbl.fold (fun k _ acc -> k::acc) passport [] in
   List.fold_right (fun x y -> List.mem x keys && y) fields true
 
-let rec verify_passports l valid_passport =
-  match l with
-  | [] -> 0
-  | first::rest -> if valid_passport first then
-    1 + verify_passports rest valid_passport 
-    else verify_passports rest valid_passport
+let verify_fields passport : bool =
+  let is_int input = Str.string_match (Str.regexp "[0-9]+") input 0 in
+  if contains_passport_fields passport then
+    List.fold_right (fun x y ->
+      let value = Hashtbl.find passport x in
+      let m = (match x with
+      | "ecl" -> List.mem value ["amb"; "blu" ; "brn"; "gry"; "grn"; "hzl"; "oth"]
+      | "pid" -> is_int value && String.length value == 9
+      | "eyr" -> is_int value && int_of_string value >= 2020 && int_of_string value <= 2030
+      | "hcl" -> Str.string_match (Str.regexp "#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]") value 0
+      | "byr" -> is_int value && int_of_string value >= 1920 && int_of_string value <= 2002
+      | "iyr" -> is_int value && int_of_string value >= 2010 && int_of_string value <= 2020
+      | "hgt" -> if Str.string_match (Str.regexp "[0-9]+cm") value 0 then 
+        Scanf.sscanf value "%dcm" (fun hgt -> hgt >= 150 && hgt <= 193)
+        else if Str.string_match (Str.regexp "[0-9]+in") value 0 then
+        Scanf.sscanf value "%din" (fun hgt -> hgt >= 59 && hgt <= 76)
+        else false
+      | _ -> false
+      ) in
+      
+      m && y) fields true
+  else false
+
+let verify_passports l valid_passport =
+  List.fold_right (fun x y -> (if valid_passport x then 1 else 0) + y) l 0
 
 let () =
   let ic = open_in "input.txt" in
   let l = parse_list (build_list (ic)) in
   print_endline ("part 1: "^string_of_int(verify_passports l contains_passport_fields)); (* 216 *)
+  print_endline ("part 2: "^string_of_int(verify_passports l verify_fields)); (* 216 *)

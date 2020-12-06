@@ -37,5 +37,5 @@ let rec verify_passwords l verifier =
 let () =
   let ic = open_in "input.txt" in
   let l = build_list (ic, []) in
-    print_endline ("part 1: "^string_of_int(verify_passwords l verify_password)); (* 546 *)
-    print_endline ("part 2: "^string_of_int(verify_passwords l verify_part_2)); (* 275 *)
+  print_endline ("part 1: "^string_of_int(verify_passwords l verify_password)); (* 546 *)
+  print_endline ("part 2: "^string_of_int(verify_passwords l verify_part_2)); (* 275 *)
