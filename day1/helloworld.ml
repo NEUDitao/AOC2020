@@ -1,4 +1,3 @@
-
 let rec build_int_list (ic, l) =
   match input_line ic with
   | line -> build_int_list (ic, (int_of_string line) :: l)
